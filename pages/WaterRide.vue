@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center w-100 h-full">
+  <div class="text-center h-full w-100" >
     <!-- 조회 대상 종목의 시세 -->
     <div class="inline-block mt-3 mr-2 w-36">
       <label for="curPrice" class="block text-lg font-medium text-gray-500">대상 종목 시장가</label>
@@ -212,6 +212,21 @@ export default {
       }
       
     },
+  },
+  head: {
+    title: '물타기 계산기 - 국내 및 해외 자산의 물타기 계산기',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: '국내 및 해외 또는 코인 자산등의 물타기계산기 투입금액 및 수량 또는 목표단가등 다양한 방식으로 계산하는 물타기 계산기',
+      },
+      {
+        hid: 'keyword',
+        name: 'keyword',
+        content: '국내주식, 해외주식, 코인, 물타기, 목표단가, 추매, 추가구매, 불타기',
+      }
+    ]
   }
 }
 </script>

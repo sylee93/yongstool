@@ -54,6 +54,23 @@ export default {
     comma(val){
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+  },
+
+  // meta 태그 작성
+  head: {
+    title: '연봉 실수령액 표 - 2022년 직장인 연봉별 실수령액 표',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: '2022년 직장인 연봉별 실수령 세후 월급 및 4대보험 세금 분포 표 ',
+      },
+      {
+        hid: 'keyword',
+        name: 'keyword',
+        content: '2022년, 실수령, 직장인, 연봉, 세후, 월급, 보험료, 4대보험',
+      }
+    ]
   }
 }
 </script>

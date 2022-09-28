@@ -8,7 +8,7 @@
             </header>
             <h1 class="text-center font-bold text-2xl my-10">{{ $route.name }}</h1>
         </div>
-        <div id="main-view" class="flex justify-center mt-10 w-full">
+        <div id="main-view" class="w-full flex justify-center mt-10">
             <Nuxt />
             <!--<Nuxt></Nuxt>
             <router-view></router-view>-->
@@ -22,6 +22,11 @@
 <script>
 import MainFooter from "../components/MainFooter.vue";
 export default {
+    data() {
+        return {
+            
+        }
+    },
     components: {
         MainFooter,
     },
