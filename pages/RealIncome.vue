@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 overflow-x-scroll">
+  <div class="w-96 overflow-x-scroll">
     <table class="m-auto border-t-1 border-slate-300 border-collapse text-xs">
       <tr>
         <th class="border-b-2 border-slate-500 min-w-[70px]">연봉</th>

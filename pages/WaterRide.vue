@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center h-full w-100" >
+  <div class="text-center h-full w-96" >
     <!-- 조회 대상 종목의 시세 -->
     <div class="inline-block mt-3 mr-2 w-36">
       <label for="curPrice" class="block text-lg font-medium text-gray-500">대상 종목 시장가</label>
