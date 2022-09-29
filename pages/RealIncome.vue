@@ -1,5 +1,5 @@
 <template>
-  <div class="w-96 overflow-x-scroll">
+  <div class="overflow-x-scroll">
     <table class="m-auto border-t-1 border-slate-300 border-collapse text-xs">
       <tr>
         <th class="border-b-2 border-slate-500 min-w-[70px]">연봉</th>
@@ -50,13 +50,7 @@ export default {
       realIncome : [...realIncome],
     } 
   },
-  methods:{
-    comma(val){
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-  },
-
-  // meta 태그 작성
+  
   head: {
     title: '연봉 실수령액 표 - 2022년 직장인 연봉별 실수령액 표',
     meta: [
@@ -71,7 +65,13 @@ export default {
         content: '2022년, 실수령, 직장인, 연봉, 세후, 월급, 보험료, 4대보험',
       }
     ]
-  }
+  },
+
+  methods:{
+    comma(val){
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  },
 }
 </script>
 

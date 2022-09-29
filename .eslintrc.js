@@ -17,5 +17,6 @@ module.exports = {
     "no-console":process.env.NODE_ENV ==='production'?'error':'off',
     'vue/singleline-html-element-content-newline': 'off',
     'vue/multiline-html-element-content-newline': 'off',
+    'vue/attributes-order' : 'off',
   },
 }

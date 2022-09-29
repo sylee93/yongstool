@@ -1,20 +1,22 @@
 <template>
   <div class="text-center h-full w-96" >
+    <div class="w-full mb-5"> 
+      <input id="currencyWon" v-model="currency" type="radio" name="currency" value="원" @click="currencySymbol = '₩' "> 원(₩)
+      <input id="currencyUsd" v-model="currency" type="radio" name="currency" value="USD" class="ml-5" @click="currencySymbol = '$' "> USD($)
+    </div>
     <!-- 조회 대상 종목의 시세 -->
-    <div class="inline-block mt-3 mr-2 w-36">
+    <div class="inline-block mt-5 mr-2 w-36">
       <label for="curPrice" class="block text-lg font-medium text-gray-500">대상 종목 시장가</label>
     </div>
     <div class="inline-block mt-3 mr-2 w-52">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <span class="text-gray-500 sm:text-sm ">₩</span>
+          <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>
         </div>
-        <input id="curPrice" v-model="curPrice" type="number" name="curPrice" 
-          class="block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-           placeholder="0" @change="calTotalMoney" />
+        <input id="curPrice" v-model="curPrice" type="number" name="curPrice"  class="block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="0.00" @change="calTotalMoney" />
         <div class="absolute inset-y-0 right-0 flex items-center ">
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <span class="text-gray-500 sm:text-sm ">원</span>
+            <span class="text-gray-500 sm:text-sm ">{{this.currency}}</span>
           </div>
         </div>
       </div>
@@ -25,14 +27,12 @@
       <label for="avgPrice" class="block text-sm font-medium text-gray-500">보유 평균 단가</label>
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <span class="text-gray-500 sm:text-sm ">₩</span>
+          <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>
         </div>
-        <input id="avgPrice" v-model="avgPrice" type="number" name="avgPrice"  
-          class="block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm "
-          placeholder="0" @change="calTotalMoney" />
+        <input id="avgPrice" v-model="avgPrice" name="avgPrice" type="number" class="block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm " placeholder="0.00" @change="calTotalMoney" />
         <div class="absolute inset-y-0 right-0 flex items-center ">
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <span class="text-gray-500 sm:text-sm ">원</span>
+            <span class="text-gray-500 sm:text-sm ">{{this.currency}}</span>
           </div>
         </div>
       </div>
@@ -40,13 +40,11 @@
     <div class="inline-block w-40 ml-2 ">
       <label for="curQuantity" class="block text-sm font-medium text-gray-500">보유 수량</label>
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
-        <input id="curQuantity" v-model="curQuantity" type="number" name="curQuantity"
-          class="block w-full text-right rounded-md border-gray-300 pl-3 pr-5 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" 
-          min="0" placeholder="0" @keyup="calTotalMoney"/>
+        <input id="curQuantity" v-model="curQuantity" type="number" name="curQuantity" class="block w-full text-right rounded-md border-gray-300 pl-3 pr-5 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  min="0" placeholder="0.00" @keyup="calTotalMoney"/>
       </div>
     </div>
     <div class="flex w-full justify-center my-2 ">
-      <label class="block text-base font-medium text-gray-500">보유잔고 : {{this.balance}} 원</label>
+      <label class="block text-base font-medium text-gray-500">보유잔고 : {{this.balance | numberFormat()}} {{this.currency}}</label>
     </div>
 
     <hr>
@@ -64,14 +62,12 @@
     <div v-if="this.flag === 0" class="inline-block mt-10 mr-2 w-48">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <span class="text-gray-500 sm:text-sm ">₩</span>
+          <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>
         </div>
-        <input id="insertMoney" v-model="insertMoney" type="number" name="insertMoney" 
-          class="block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm "
-          placeholder="0" @focus="calTotalMoney" />
+        <input id="insertMoney" v-model="insertMoney" type="number" name="insertMoney" class="block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm " placeholder="0.00" @focus="calTotalMoney" />
         <div class="absolute inset-y-0 right-0 flex items-center ">
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <span class="text-gray-500 sm:text-sm ">원</span>
+            <span class="text-gray-500 sm:text-sm ">{{this.currency}}</span>
           </div>
         </div>
       </div>
@@ -80,9 +76,7 @@
     <!-- 투입 수량 평단 계산 -->
     <div v-if="this.flag === 1" class="inline-block mt-10 mr-2 w-48">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
-        <input id="insertQuantity" v-model="insertQuantity" type="number" name="insertQuantity" 
-          class="w-full text-right rounded-md border-gray-300 pl-3 pr-10 sm:text-sm pr-5 "
-          placeholder="0" @focus="calTotalMoney"/>
+        <input id="insertQuantity" v-model="insertQuantity" type="number" name="insertQuantity"  class="w-full text-right rounded-md border-gray-300 pl-3 pr-10 sm:text-sm pr-5 " placeholder="0" @focus="calTotalMoney"/>
         <div class="absolute inset-y-0 right-0 flex items-center ">
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             <span class="text-gray-500 sm:text-sm ">개</span>
@@ -95,14 +89,12 @@
     <div v-if="this.flag === 2" class="inline-block mt-10 mr-2 w-48">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <span class="text-gray-500 sm:text-sm ">₩</span>
+          <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>
         </div>
-        <input id="targerPrice" v-model="targetPrice" type="number" name="targerPrice" 
-          class="block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm "
-          placeholder="0" @focus="calTotalMoney"  />
+        <input id="targerPrice" v-model="targetPrice" type="number" name="targerPrice" class="block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm " placeholder="0.00" @focus="calTotalMoney"  />
         <div class="absolute inset-y-0 right-0 flex items-center ">
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <span class="text-gray-500 sm:text-sm ">원</span>
+            <span class="text-gray-500 sm:text-sm ">{{this.currency}}</span>
           </div>
         </div>
       </div>
@@ -124,15 +116,13 @@
     <div v-if="this.flag === 0 || this.flag === 1" class="inline-block w-44 ml-2 mt-3">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <span class="text-gray-500 sm:text-sm ">₩</span>
+          <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>
         </div>
-        <input v-if="this.flag === 0" id="preAvgPrice" v-model="preAvgPrice" type="number" name="preAvgPrice"  readonly
-        class="read-only:bg-gray-100 block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-s" min="0" placeholder="0" />
-        <input v-if="this.flag === 1" id="preAvgPrice" v-model="preAvgPrice" type="number" name="preAvgPrice" readonly
-        class="read-only:bg-gray-100 block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-s" min="0" placeholder="0" />
+        <input v-if="this.flag === 0" id="preAvgPrice" v-model="preAvgPrice" type="number" name="preAvgPrice"  readonly class="read-only:bg-gray-100 block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-s" min="0" placeholder="0.00" />
+        <input v-if="this.flag === 1" id="preAvgPrice" v-model="preAvgPrice" type="number" name="preAvgPrice" readonly class="read-only:bg-gray-100 block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-s" min="0" placeholder="0.00" />
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <span class="text-gray-500 sm:text-sm ">원</span>
+            <span class="text-gray-500 sm:text-sm ">{{this.currency}}</span>
           </div>
         </div>
       </div>
@@ -141,8 +131,7 @@
     <!-- 필요 수량 -->
     <div v-if="this.flag === 2" class="inline-block w-44 ml-2 mt-3">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
-        <input id="needQuantity" v-model="needQuantity" type="number" name="needQuantity" readonly
-        class="read-only:bg-gray-100 w-full text-right rounded-md border-gray-300 pl-3 pr-10 sm:text-sm pr-5" min="0" placeholder="0" />
+        <input id="needQuantity" v-model="needQuantity" type="number" name="needQuantity" readonly class="read-only:bg-gray-100 w-full text-right rounded-md border-gray-300 pl-3 pr-10 sm:text-sm pr-5" min="0" placeholder="0.00" />
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
           <span class="text-gray-500 sm:text-sm ">개</span>
         </div>
@@ -156,7 +145,14 @@
 <script>
 
 export default {
-  
+  filters: {
+    numberFormat: (value, numFix) => {
+        value = parseFloat(value);
+        if (!value) return '0';
+        return value.toFixed(numFix).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+    },
+  },
+
   data() {
     return {
       avgPrice: "",
@@ -169,7 +165,25 @@ export default {
       preAvgPrice: 0,
       insertQuantity: "",
       flag: 0,
+      currency: '원',
+      currencySymbol: '₩',
     }
+  },
+
+  head: {
+    title: '물타기 계산기 - 국내 및 해외 자산의 물타기 계산기',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: '국내 및 해외 또는 코인 자산등의 물타기계산기 투입금액 및 수량 또는 목표단가등 다양한 방식으로 계산하는 물타기 계산기',
+      },
+      {
+        hid: 'keyword',
+        name: 'keyword',
+        content: '국내주식, 해외주식, 코인, 물타기, 목표단가, 추매, 추가구매, 불타기',
+      }
+    ]
   },
 
   methods: {
@@ -213,21 +227,7 @@ export default {
       
     },
   },
-  head: {
-    title: '물타기 계산기 - 국내 및 해외 자산의 물타기 계산기',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: '국내 및 해외 또는 코인 자산등의 물타기계산기 투입금액 및 수량 또는 목표단가등 다양한 방식으로 계산하는 물타기 계산기',
-      },
-      {
-        hid: 'keyword',
-        name: 'keyword',
-        content: '국내주식, 해외주식, 코인, 물타기, 목표단가, 추매, 추가구매, 불타기',
-      }
-    ]
-  }
+  
 }
 </script>
 
