@@ -53,7 +53,8 @@ export default {
 
   robots: {
     UserAgent: "*",
-    Disallow: "",
+    Allow: "/",
+    Sitemap: "https://www.yongstool.com/sitemap.xml",
   },
 
   sitemap: {

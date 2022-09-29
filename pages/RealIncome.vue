@@ -3,14 +3,14 @@
     <table class="m-auto border-t-1 border-slate-300 border-collapse text-xs">
       <tr>
         <th class="border-b-2 border-slate-500 min-w-[70px]">연봉</th>
-        <th class="border-b-2 border-slate-500 min-w-[50px]">실수령액</th>
-        <th class="border-b-2 border-slate-500 min-w-[70px]">공제액합계</th>
+        <th class="border-b-2 border-slate-500 min-w-[50px]">실수령액 </th>
+        <th class="border-b-2 border-slate-500 min-w-[70px]">공제액합계 </th>
         <th class="border-b-2 border-slate-500 min-w-[65px]">월급</th>
-        <th class="border-b-2 border-slate-500 min-w-[55px]">국민연금</th>
-        <th class="border-b-2 border-slate-500 min-w-[55px]">건강보험</th>
-        <th class="border-b-2 border-slate-500 min-w-[55px]">장기요양</th>
-        <th class="border-b-2 border-slate-500 min-w-[45px]">고용보험</th>
-        <th class="border-b-2 border-slate-500 min-w-[50px]">소득세</th>
+        <th class="border-b-2 border-slate-500 min-w-[55px]">국민연금 </th>
+        <th class="border-b-2 border-slate-500 min-w-[55px]">건강보험 </th>
+        <th class="border-b-2 border-slate-500 min-w-[55px]">장기요양 </th>
+        <th class="border-b-2 border-slate-500 min-w-[45px]">고용보험 </th>
+        <th class="border-b-2 border-slate-500 min-w-[50px]">소득세 </th>
         <th class="border-b-2 border-slate-500 min-w-[50px]">지방소득세</th>
       </tr>
       <tr v-for="(a,i) in realIncome" :key="i">
