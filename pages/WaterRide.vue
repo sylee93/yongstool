@@ -43,10 +43,13 @@
         <input id="curQuantity" v-model="curQuantity" type="number" name="curQuantity" class="block w-full text-right rounded-md border-gray-300 pl-3 pr-5 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  min="0" placeholder="0.00" @keyup="calTotalMoney"/>
       </div>
     </div>
-    <div class="flex w-full justify-center my-2 ">
-      <label class="block text-base font-medium text-gray-500">보유잔고 : {{this.balance | numberFormat()}} {{this.currency}}</label>
+    <div class="flex w-full justify-center" style="margint-right:5px">
+      <label class="mr-6 block text-base font-medium text-gray-500">매입금액 : {{this.balance | numberFormat()}} {{this.currency}} </label>
     </div>
-
+   
+    <div class="flex w-full justify-center">
+      
+    </div>
     <hr>
 
     
@@ -199,15 +202,14 @@ export default {
       const curQuantity = Number(this.curQuantity); // 현재 보유 수량
       const insertMoney = Number(this.insertMoney);
       const insertQuantity = Number(this.insertQuantity);
+      const targetPrice = this.targetPrice ? Number(this.targetPrice) : 0;
+
       if(status === "0"){
         this.preAvgPrice = Math.ceil((insertMoney + balance) / ((insertMoney / curPrice) + curQuantity) * 100 ) / 100;
       } else if (status === "1"){
         
         this.preAvgPrice = Math.ceil((balance + (insertQuantity * curPrice)) / (insertQuantity + curQuantity) * 100) / 100; 
       } else if (status === "2"){
-        //  유효성 체크
-        const targetPrice = this.targetPrice ? this.targetPrice : 0;
-
         // 시장가보다 목표 단가가 높을 경우
         if(curPrice === 0 || avgPrice === 0 || targetPrice === 0){
           alert("시장가, 보유평단, 목표단가 항목은 필수 입력 사항입니다.");
@@ -226,9 +228,9 @@ export default {
 
         let temp = 0;
         let temp2 = 0;
-        temp = (this.targetPrice * this.curQuantity);
-        temp = temp - this.balance;
-        temp2 = this.curPrice - this.targetPrice;
+        temp = (targetPrice * curQuantity);
+        temp = temp - balance;
+        temp2 = curPrice - targetPrice;
         this.needQuantity = Math.ceil((temp / temp2) * 10) / 10;
       }
       
