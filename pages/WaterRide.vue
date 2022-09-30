@@ -59,7 +59,7 @@
     </div>
 
     <!-- 투입금액 대비 평단 계산 -->
-    <div v-if="this.flag === 0" class="inline-block mt-10 mr-2 w-48">
+    <div v-if="this.flag === '0'" class="inline-block mt-10 mr-2 w-48">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>
@@ -74,7 +74,7 @@
     </div>
 
     <!-- 투입 수량 평단 계산 -->
-    <div v-if="this.flag === 1" class="inline-block mt-10 mr-2 w-48">
+    <div v-if="this.flag === '1'" class="inline-block mt-10 mr-2 w-48">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <input id="insertQuantity" v-model="insertQuantity" type="number" name="insertQuantity"  class="w-full text-right rounded-md border-gray-300 pl-3 pr-10 sm:text-sm pr-5 " placeholder="0" @focus="calTotalMoney"/>
         <div class="absolute inset-y-0 right-0 flex items-center ">
@@ -86,7 +86,7 @@
     </div>
 
     <!-- 목표단가까지의 필요 수량 계산 -->
-    <div v-if="this.flag === 2" class="inline-block mt-10 mr-2 w-48">
+    <div v-if="this.flag === '2'" class="inline-block mt-10 mr-2 w-48">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>
@@ -105,21 +105,21 @@
       <button class="h-10 px-5 w-60 rounded-xl bg-gradient-to-r from-pink-200 to-purple-200 text-gray-600 scale-90 hover:scale-100" @click="calculator(flag)">계산하기</button>
     </div>
 
-    <div v-if="this.flag === 0 || this.flag === 1" class="inline-block w-30 ml-2 mt-3 ">
+    <div v-if="this.flag === '0' || this.flag === '1'" class="inline-block w-30 ml-2 mt-3 ">
       <label for="preAvgPrice" class="text-lg font-medium text-gray-500">예상 평균 단가</label>
     </div>
-    <div v-if="this.flag === 2" class="inline-block w-30 ml-2 mt-3 ">
+    <div v-if="this.flag === '2'" class="inline-block w-30 ml-2 mt-3 ">
       <label for="" class="text-lg font-medium text-gray-500">추매 수량</label>
     </div>
     
     <!-- 예상 평균 단가 -->
-    <div v-if="this.flag === 0 || this.flag === 1" class="inline-block w-44 ml-2 mt-3">
+    <div v-if="this.flag === '0' || this.flag === '1'" class="inline-block w-44 ml-2 mt-3">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>
         </div>
-        <input v-if="this.flag === 0" id="preAvgPrice" v-model="preAvgPrice" type="number" name="preAvgPrice"  readonly class="read-only:bg-gray-100 block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-s" min="0" placeholder="0.00" />
-        <input v-if="this.flag === 1" id="preAvgPrice" v-model="preAvgPrice" type="number" name="preAvgPrice" readonly class="read-only:bg-gray-100 block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-s" min="0" placeholder="0.00" />
+        <input v-if="this.flag === '0'" id="preAvgPrice" v-model="preAvgPrice" type="number" name="preAvgPrice"  readonly class="read-only:bg-gray-100 block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-s" min="0" placeholder="0.00" />
+        <input v-if="this.flag === '1'" id="preAvgPrice" v-model="preAvgPrice" type="number" name="preAvgPrice" readonly class="read-only:bg-gray-100 block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-s" min="0" placeholder="0.00" />
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             <span class="text-gray-500 sm:text-sm ">{{this.currency}}</span>
@@ -129,7 +129,7 @@
     </div>
    
     <!-- 필요 수량 -->
-    <div v-if="this.flag === 2" class="inline-block w-44 ml-2 mt-3">
+    <div v-if="this.flag === '2'" class="inline-block w-44 ml-2 mt-3">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <input id="needQuantity" v-model="needQuantity" type="number" name="needQuantity" readonly class="read-only:bg-gray-100 w-full text-right rounded-md border-gray-300 pl-3 pr-10 sm:text-sm pr-5" min="0" placeholder="0.00" />
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
@@ -164,7 +164,7 @@ export default {
       insertMoney: "",
       preAvgPrice: 0,
       insertQuantity: "",
-      flag: 0,
+      flag: '0',
       currency: '원',
       currencySymbol: '₩',
     }
@@ -193,28 +193,35 @@ export default {
     },
     // 목표단가 대비 필요수량 계산
     calculator(status){
-      const curPrice = this.curPrice ? this.curPrice : 0; // 시장가
-      const avgPrice = this.avgPrice ? this.avgPrice : 0; // 평균단가
-      const balance = this.balance; // 보유잔고
-      const curQuantity = this.curQuantity; // 현재 보유 수량
-      
-      if(status === 0){
-        const insertMoney = this.insertMoney;
+      const curPrice = this.curPrice ? Number(this.curPrice) : 0; // 시장가
+      const avgPrice = this.avgPrice ? Number(this.avgPrice) : 0; // 평균단가
+      const balance = Number(this.balance); // 보유잔고
+      const curQuantity = Number(this.curQuantity); // 현재 보유 수량
+      const insertMoney = Number(this.insertMoney);
+      const insertQuantity = Number(this.insertQuantity);
+      if(status === "0"){
         this.preAvgPrice = Math.ceil((insertMoney + balance) / ((insertMoney / curPrice) + curQuantity) * 100 ) / 100;
-      } else if (status === 1){
-        const insertQuantity = this.insertQuantity;
+      } else if (status === "1"){
+        
         this.preAvgPrice = Math.ceil((balance + (insertQuantity * curPrice)) / (insertQuantity + curQuantity) * 100) / 100; 
-      } else if (status === 2){
+      } else if (status === "2"){
         //  유효성 체크
         const targetPrice = this.targetPrice ? this.targetPrice : 0;
 
         // 시장가보다 목표 단가가 높을 경우
         if(curPrice === 0 || avgPrice === 0 || targetPrice === 0){
           alert("시장가, 보유평단, 목표단가 항목은 필수 입력 사항입니다.");
+          return false;
         }
-        // 평단이 시장가보다 낮을 때 목표단가는 평단보다 낮게 잡을 수 없다
-        else if((this.avgPrice <= this.curPrice)){
+        // 평단이 시장가보다 낮은 경우
+        else if((avgPrice <= curPrice)){
           alert("대상 종목의 시장가 보다 보유 평단이 낮으므로\n물타기를 할 수 없습니다.");
+          return false;
+        }
+        // 목표단가가 시장가 보다 낮은 경우
+        else if((targetPrice <= curPrice)){
+          alert("대상 종목의 시장가 보다 보유 평단이 낮으므로\n물타기를 할 수 없습니다.");
+          return false;
         }
 
         let temp = 0;
