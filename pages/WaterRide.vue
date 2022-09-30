@@ -185,7 +185,17 @@ export default {
         hid: 'keyword',
         name: 'keyword',
         content: '국내주식, 해외주식, 코인, 물타기, 목표단가, 추매, 추가구매, 불타기',
-      }
+      },
+      {
+        hid: 'og:title',
+        name: 'og:title',
+        content: '국내 & 미국 주식 물타기 계산기',
+      },
+      {
+        hid: 'og:description',
+        name: 'og:description',
+        content: '추매 수량 및 예상 평균 단가 계산 해보기',
+      },
     ]
   },
 

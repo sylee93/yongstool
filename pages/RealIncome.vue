@@ -63,7 +63,17 @@ export default {
         hid: 'keyword',
         name: 'keyword',
         content: '2022년, 실수령, 직장인, 연봉, 세후, 월급, 보험료, 4대보험',
-      }
+      },
+      {
+        hid: 'og:title',
+        name: 'og:title',
+        content: '2022년 연봉 실수령액 표',
+      },
+      {
+        hid: 'og:description',
+        name: 'og:description',
+        content: '실수령 월급 및 각종 세금 정보',
+      },
     ]
   },
 
