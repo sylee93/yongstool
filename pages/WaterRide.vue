@@ -43,7 +43,7 @@
         <input id="curQuantity" v-model="curQuantity" type="number" name="curQuantity" class="block w-full text-right rounded-md border-gray-300 pl-3 pr-5 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"  min="0" placeholder="0.00" @keyup="calTotalMoney"/>
       </div>
     </div>
-    <div class="flex w-full justify-center" style="margint-right:5px">
+    <div class="flex w-full justify-center my-5">
       <label class="mr-6 block text-base font-medium text-gray-500">매입금액 : {{this.balance | numberFormat()}} {{this.currency}} </label>
     </div>
    
@@ -52,8 +52,8 @@
     </div>
     <hr>
 
-    
-    <div class="inline-block mt-5 mr-2 w-32">
+    <label class="mt-5 mb-1 block text-xs text-gray-400">투입금액, 투입수량, 목표단가 선택하여 조회 가능합니다</label>
+    <div class="inline-block mr-2 w-32">
       <select v-model="flag" class="text-base w-28 pl-2 font-medium text-gray-500 rounded-md shadow-sm border-solid border-2">
         <option value="0">투입금액</option>
         <option value="1">투입수량</option>
@@ -62,7 +62,7 @@
     </div>
 
     <!-- 투입금액 대비 평단 계산 -->
-    <div v-if="this.flag === '0'" class="inline-block mt-10 mr-2 w-48">
+    <div v-if="this.flag === '0'" class="inline-block mr-2 w-48">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>
@@ -77,7 +77,7 @@
     </div>
 
     <!-- 투입 수량 평단 계산 -->
-    <div v-if="this.flag === '1'" class="inline-block mt-10 mr-2 w-48">
+    <div v-if="this.flag === '1'" class="inline-block mr-2 w-48">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <input id="insertQuantity" v-model="insertQuantity" type="number" name="insertQuantity"  class="w-full text-right rounded-md border-gray-300 pl-3 pr-10 sm:text-sm pr-5 " placeholder="0" @focus="calTotalMoney"/>
         <div class="absolute inset-y-0 right-0 flex items-center ">
@@ -89,7 +89,7 @@
     </div>
 
     <!-- 목표단가까지의 필요 수량 계산 -->
-    <div v-if="this.flag === '2'" class="inline-block mt-10 mr-2 w-48">
+    <div v-if="this.flag === '2'" class="inline-block mr-2 w-48">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>

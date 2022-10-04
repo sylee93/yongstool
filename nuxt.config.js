@@ -25,7 +25,7 @@ export default {
     extendRoutes(routes, resolve){
       routes.length = 0;
       routes.push({
-        name: '',
+        name: 'Tools',
         path: '/',
         component: resolve(__dirname, 'pages/index.vue'),
         url: "/",
