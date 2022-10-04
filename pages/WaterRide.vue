@@ -174,7 +174,7 @@ export default {
   },
 
   head: {
-    title: '물타기 계산기(원,달러) - 국내, 해외 주식 물타기 계산기',
+    title: '물타기 계산기(원,달러) - 국내, 해외 주식 평단가 계산',
     meta: [
       {
         hid: 'description',
