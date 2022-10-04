@@ -105,7 +105,7 @@
 
     <!-- 계산 버튼 -->
     <div class="ml-2 pt-3">
-      <button class="h-10 px-5 w-60 rounded-xl bg-gradient-to-r from-pink-200 to-purple-200 text-gray-600 scale-90 hover:scale-100" @click="calculator(flag)">계산하기</button>
+      <button class="btn_calc h-10 px-5 w-60 rounded-xl bg-gradient-to-r from-pink-200 to-purple-200 text-gray-600" @click="calculator(flag)">계산하기</button>
     </div>
 
     <div v-if="this.flag === '0' || this.flag === '1'" class="inline-block w-30 ml-2 mt-3 ">
@@ -174,7 +174,7 @@ export default {
   },
 
   head: {
-    title: '물타기 계산기 - 국내 및 해외 자산의 물타기 계산기',
+    title: '물타기 계산기(원,달러) - 국내, 해외 주식 물타기 계산기',
     meta: [
       {
         hid: 'description',
@@ -256,8 +256,14 @@ export default {
   input::-webkit-inner-spin-button{
     -webkit-appearance: none;
   }
-  /* Firefox  */
+    /* Firefox  */
   input[type='number'] {
-  -moz-appearance: textfield;
-}
+    -moz-appearance: textfield;
+  }
+  .btn_calc {
+    transition: all 0.3s;
+  }
+  .btn_calc:hover{
+    transform: scale(1.1);
+  }
 </style>

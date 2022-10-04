@@ -12,7 +12,7 @@ export default {
       { 
         hid: 'description', 
         name: 'description', 
-        content: '간단한 계산 도구 사이트' 
+        content: '유용한 계산 도구 사이트' 
       },
       { name: 'format-detection', content: 'telephone=no' },
     ],
@@ -21,7 +21,29 @@ export default {
       { rel: 'canonical', href: 'https://yongstool.com' }
     ],
   },
-
+  router: {
+    extendRoutes(routes, resolve){
+      routes.length = 0;
+      routes.push({
+        name: '',
+        path: '/',
+        component: resolve(__dirname, 'pages/index.vue'),
+        url: "/",
+      }),
+      routes.push({
+        name: '2022년 연봉 실수령액 표',
+        path: '/RealIncome',
+        component: resolve(__dirname, 'pages/RealIncome.vue'),
+        url: "/realincome",
+      }),
+      routes.push({
+        name: '물타기 계산기',
+        path: '/WaterRide',
+        component: resolve(__dirname, 'pages/WaterRide.vue'),
+        url: "/waterride",
+      })
+    }
+  },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
