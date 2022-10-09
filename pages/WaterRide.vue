@@ -1,7 +1,7 @@
 <template>
   <div class="text-center h-full w-96" >
     <div class="w-full mb-5"> 
-      <input id="currencyWon" v-model="currency" type="radio" name="currency" value="원" @click="currencySymbol = '₩' "> 원(₩)
+      <input id="currencyWon" v-model="currency" type="radio" name="currency" value="원" @click="currencySymbol = '₩', selectedSymbol = '₩' "> 원(₩)
       <input id="currencyUsd" v-model="currency" type="radio" name="currency" value="USD" class="ml-5" @click="currencySymbol = '$' "> USD($)
     </div>
     <!-- 조회 대상 종목의 시세 -->
@@ -61,8 +61,8 @@
       </select>
     </div>
 
-    <!-- 투입금액 대비 평단 계산 -->
-    <div v-if="this.flag === '0'" class="inline-block mr-2 w-48">
+    <!-- 투입금액 대비 평단 계산 (원)-->
+    <div v-if="this.flag === '0' && this.currency ==='원'" class="inline-block mr-2 w-48">
       <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <span class="text-gray-500 sm:text-sm ">{{this.currencySymbol}}</span>
@@ -72,6 +72,26 @@
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             <span class="text-gray-500 sm:text-sm ">{{this.currency}}</span>
           </div>
+        </div>
+      </div>
+    </div>
+    <!-- 투입금액 대비 평단 계산 (USD)-->
+    <div v-if="this.flag === '0' && this.currency ==='USD'" class="inline-block w-48">
+      <div class="inline-block mr-2 w-48">
+        <div class="relative mt-1 rounded-md shadow-sm border-solid border-2">
+          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <span class="text-gray-500 sm:text-sm ">{{this.selectedSymbol}}</span>
+          </div>
+          <input id="insertMoney" v-model="insertMoney" type="number" name="insertMoney" class="block w-full rounded-md border-gray-300 pl-7 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm " placeholder="0.00" @focus="calTotalMoney" />
+          <div class="absolute inset-y-0 right-0 flex items-center ">
+            <label for="slectedCurrency" class="sr-only"></label>
+            <select v-model="slectCurrency" id="slectedCurrency" name="slectedCurrency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-2 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" @change="getInsertKind">
+              <option value="won">원</option>
+              <option value="usd">USD</option>
+              <!--option>EUR</option>-->
+            </select>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -140,12 +160,13 @@
         </div>
       </div>
     </div>
-    
+    <button @click="test"> tste</button>
   </div>
 </template>
 
 
 <script>
+import axios from 'axios';
 
 export default {
   filters: {
@@ -158,18 +179,21 @@ export default {
 
   data() {
     return {
-      avgPrice: "",
-      curQuantity:"",
-      balance: 0,
-      needQuantity: 0,
-      targetPrice: "",
-      curPrice: "",
-      insertMoney: "",
-      preAvgPrice: 0,
-      insertQuantity: "",
-      flag: '0',
-      currency: '원',
-      currencySymbol: '₩',
+      avgPrice: "",           // 보유 평균 단가
+      curQuantity:"",         // 보유 수량
+      balance: 0,             // 보유 잔고
+      needQuantity: 0,        // 필요 수량
+      targetPrice: "",        // 목표 단가
+      curPrice: "",           // 시장가
+      insertMoney: "",        // 투입금액
+      preAvgPrice: 0,         // 예상 평균 단가
+      insertQuantity: "",     // 투입수량
+      flag: '0',              // 평단 조회 조건
+      currency: '원',         // 화폐 종류
+      currencySymbol: '₩',    // 화폐 종류 기호
+      getExchangeMoney: 0,    // 원/달러 환율
+      selectedSymbol: '₩',    // 투입금액의 화폐 종류 기호
+      slectCurrency: "won",   // 투입금액의 화폐 종류 상태
     }
   },
 
@@ -200,6 +224,33 @@ export default {
   },
 
   methods: {
+    test(){
+       const url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent";
+      axios.get(url,{
+        params: {
+          codes: "FRX.KRWUSD",
+        }
+      }).then((result)=>{
+        this.getExchangeMoney.push(Number(result.data[0].basePrice));
+        console.log(Number(result.data[0].basePrice));
+      }).catch(error => {
+        console.log("ASd");
+        console.log(error);
+        return false;
+      });
+    },
+    // 투입금액 종류
+    getInsertKind(){
+     
+      
+      if(this.slectCurrency === "won"){
+        this.selectedSymbol = "₩";
+        this.insertMoney = this.insertMoney * this.getExchangeMoney;
+      } else if(this.slectCurrency === "usd") {
+        this.selectedSymbol = "$";
+        this.insertMoney = this.insertMoney / this.getExchangeMoney;
+      }
+    },
     // 보유 잔고 계산
     calTotalMoney(){
       this.balance = this.avgPrice*this.curQuantity
@@ -210,12 +261,21 @@ export default {
       const avgPrice = this.avgPrice ? Number(this.avgPrice) : 0; // 평균단가
       const balance = Number(this.balance); // 보유잔고
       const curQuantity = Number(this.curQuantity); // 현재 보유 수량
-      const insertMoney = Number(this.insertMoney);
+      let insertMoney = Number(this.insertMoney);
       const insertQuantity = Number(this.insertQuantity);
       const targetPrice = this.targetPrice ? Number(this.targetPrice) : 0;
 
       if(status === "0"){
-        this.preAvgPrice = Math.ceil((insertMoney + balance) / ((insertMoney / curPrice) + curQuantity) * 100 ) / 100;
+        if(this.currencySymbol === this.selectedSymbol){
+          this.preAvgPrice = Math.ceil((insertMoney + balance) / ((insertMoney / curPrice) + curQuantity) * 100 ) / 100;
+        } else {
+          
+
+          insertMoney = insertMoney * this.getExchangeMoney;
+          this.preAvgPrice = Math.ceil((insertMoney + balance) / ((insertMoney / curPrice) + curQuantity) * 100 ) / 100;
+          
+        }
+        
       } else if (status === "1"){
         
         this.preAvgPrice = Math.ceil((balance + (insertQuantity * curPrice)) / (insertQuantity + curQuantity) * 100) / 100; 
