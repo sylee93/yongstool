@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="flex w-full justify-center my-5">
-      <label class="mr-6 block text-base font-medium text-gray-500">매입금액 : {{this.balance | numberFormat()}} {{this.currency}} </label>
+      <label class="mr-6 block text-base font-medium text-gray-500">매입금액 : {{this.balance}}  {{this.currency}} </label>
     </div>
    
     <div class="flex w-full justify-center">
@@ -148,13 +148,7 @@
 <script>
 
 export default {
-  filters: {
-    numberFormat: (value, numFix) => {
-        value = parseFloat(value);
-        if (!value) return '0';
-        return value.toFixed(numFix).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-    },
-  },
+
 
   data() {
     return {
@@ -173,7 +167,31 @@ export default {
     }
   },
 
- 
+  head: {
+    title: '물타기 계산기(원,달러) - 국내, 해외 주식 평단가 계산',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: '국내 및 해외 또는 코인 자산등의 물타기계산기 투입금액 및 수량 또는 목표단가등 다양한 방식으로 계산하는 물타기 계산기',
+      },
+      {
+        hid: 'keyword',
+        name: 'keyword',
+        content: '국내주식, 해외주식, 코인, 물타기, 목표단가, 추매, 추가구매, 불타기',
+      },
+      {
+        hid: 'og:title',
+        name: 'og:title',
+        content: '국내 & 미국 주식 물타기 계산기',
+      },
+      {
+        hid: 'og:description',
+        name: 'og:description',
+        content: '추매 수량 및 예상 평균 단가 계산 해보기',
+      },
+    ]
+  },
 
   methods: {
     // 보유 잔고 계산
