@@ -40,7 +40,7 @@ export default {
         name: '물타기 계산기',
         path: '/WaterRide',
         component: resolve(__dirname, 'pages/WaterRide.vue'),
-        url: "/waterride",
+        url: "/test",
       })
     }
   },
