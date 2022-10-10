@@ -38,9 +38,9 @@ export default {
       }),
       routes.push({
         name: '물타기 계산기',
-        path: '/WaterRide',
-        component: resolve(__dirname, 'pages/WaterRide.vue'),
-        url: "/test",
+        path: '/CalcWater',
+        component: resolve(__dirname, 'pages/CalcWater.vue'),
+        url: "/CalcWater",
       })
     }
   },
