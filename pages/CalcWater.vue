@@ -226,7 +226,7 @@ export default {
         }
         // 목표단가가 시장가 보다 낮은 경우
         else if((targetPrice <= curPrice)){
-          alert("대상 종목의 시장가 보다 보유 평단이 낮으므로\n물타기를 할 수 없습니다.");
+          alert("대상 종목의 시장가 보다 목표 단가가 낮으므로\n물타기를 할 수 없습니다.");
           return false;
         }
 
