@@ -14,6 +14,16 @@
 
 export default {
   name: 'IndexPage',
+  head: {
+    title: 'yong\'s tool', 
+    meta: [
+      { 
+        hid: 'description', 
+        name: 'description', 
+        content: '유용한 계산 도구 사이트' 
+      },
+    ]
+  },
 }
 </script>
 
