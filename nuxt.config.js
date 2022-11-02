@@ -15,6 +15,7 @@ export default {
         content: '유용한 계산 도구 사이트' 
       },
       { name: 'format-detection', content: 'telephone=no' },
+      { name: 'google-site-verification', content:'2o4RihSKML28YS6_J93GbP4zyafHW1Z7JQKMYSEd1H0' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
