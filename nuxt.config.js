@@ -32,7 +32,7 @@ export default {
         url: "/",
       }),
       routes.push({
-        name: '2022년 연봉 실수령액 표',
+        name: '2023년 연봉 실수령액 표',
         path: '/RealIncome',
         component: resolve(__dirname, 'pages/RealIncome.vue'),
         url: "/realincome",
