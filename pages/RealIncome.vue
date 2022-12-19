@@ -1,8 +1,8 @@
 <template>
   <div class="overflow-x-scroll">
-    <table class="m-auto border-t-1 border-slate-300 border-collapse text-sm">
+    <table class="m-auto border-t-1 border-slate-300 border-collapse text-base">
       <tr>
-        <th class="border-b-2 border-slate-500 w-16">연봉</th>
+        <th class="border-b-2 border-slate-500 w-20">연봉</th>
         <th class="border-b-2 border-slate-500 w-24">(세후)연봉 </th>
         <th class="border-b-2 border-slate-500 w-20">(세전)월급</th>
         <th class="border-b-2 border-slate-500 w-24">(세후)월급 </th>
