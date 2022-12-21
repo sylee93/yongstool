@@ -21,6 +21,13 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'canonical', href: 'https://yongstool.com' }
     ],
+    script: [
+      {
+        defer: true,
+        hid: 'adsense',
+        src: '/adsense.js',
+      },
+    ],
   },
   router: {
     extendRoutes(routes, resolve){
