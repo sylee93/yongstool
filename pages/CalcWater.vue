@@ -1,5 +1,13 @@
 <template>
   <div class="text-center h-full w-96" >
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7883920237268404"
+        crossorigin="anonymous"></script>
+    <!-- 가로광고 -->
+    <ins class="adsbygoogle"
+        style="display:inline-block;width:400px;height:90px"
+        data-ad-client="ca-pub-7883920237268404"
+        data-ad-slot="7778933036"></ins>
+    
     <div class="w-full mb-5"> 
       <input id="currencyWon" v-model="currency" type="radio" name="currency" value="원" @click="currencySymbol = '₩' "> 원(₩)
       <input id="currencyUsd" v-model="currency" type="radio" name="currency" value="USD" class="ml-5" @click="currencySymbol = '$' "> USD($)
@@ -46,7 +54,11 @@
     <div class="flex w-full justify-center my-5">
       <label class="mr-6 block text-base font-medium text-gray-500">매입금액 : {{this.balance}}  {{this.currency}} </label>
     </div>
-   
+    <!-- 가로광고 -->
+    <ins class="adsbygoogle"
+        style="display:inline-block;width:400px;height:90px"
+        data-ad-client="ca-pub-7883920237268404"
+        data-ad-slot="7778933036"></ins>
     <div class="flex w-full justify-center">
       
     </div>
@@ -140,7 +152,9 @@
         </div>
       </div>
     </div>
-    
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
   </div>
 </template>
 
@@ -190,7 +204,14 @@ export default {
         name: 'og:description',
         content: '추매 수량 및 예상 평균 단가 계산 해보기',
       },
-    ]
+    ],
+    script: [
+      {
+        defer: true,
+        hid: 'adsense',
+        src: '/adsense.js',
+      },
+    ],
   },
 
   methods: {
