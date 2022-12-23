@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-x-scroll">
-    <table class="m-auto border-t-1 border-slate-300 border-collapse text-base">
+    <table class="m-auto border-t-1 border-slate-300 border-collapse text-sm">
       <tr>
         <th class="border-b-2 border-slate-500 w-20">연봉</th>
         <th class="border-b-2 border-slate-500 w-24">(세후)연봉 </th>
@@ -34,7 +34,7 @@
 import realIncome from '../assets/realIncome.js';
 
 export default {
- data() {
+  data() {
     return {
       realIncome : [...realIncome],
     } 
@@ -69,8 +69,10 @@ export default {
   methods:{
     comma(val){
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    },
   },
+
+  
 }
 </script>
 
